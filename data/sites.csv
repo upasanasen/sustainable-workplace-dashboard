@@ -1,0 +1,6 @@
+site,region,employees,office_area_sqm,lat,lon,roof_area_sqm
+Barcelona HQ,Europe,350,4200,41.3874,2.1686,1000
+Stockholm Office,Europe,220,3100,59.3293,18.0686,700
+London Office,Europe,280,3600,51.5074,-0.1278,800
+New York Office,North America,320,4000,40.7128,-74.0060,900
+Singapore Office,Asia,260,3300,1.3521,103.8199,600

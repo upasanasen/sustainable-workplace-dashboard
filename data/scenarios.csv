@@ -1,0 +1,5 @@
+scenario,lighting_upgrade,hvac_upgrade,green_roof,low_carbon_materials,target_kwh_per_sqm
+Baseline,0,0,0,0,120
+Efficiency Pack,1,1,0,0,90
+Efficiency + Green Roof,1,1,1,0,90
+Full Package,1,1,1,1,80
