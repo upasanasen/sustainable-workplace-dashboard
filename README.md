@@ -42,3 +42,20 @@ streamlit run app.py
 ```
 
 ## Screenshots
+### Executive Overview
+![Executive Overview](assets/dashboard_overview.png)
+
+### Site Portfolio Map
+![Site Map](assets/site_map.png)
+
+### Cost ROI Simulator
+![ROI Simulator](assets/roi_simulator.png)
+
+### Carbon Green Roof Analysis
+![Carbon GreenRoof](assets/carbon_greenroof.png)
+
+### Procurement Vendor Evaluation
+![Procurement Vendors](assets/procurement_vendors.png)
+
+### Compliance Dashboard
+![Compliance Dashboard](assets/compliance_dashboard.png)
