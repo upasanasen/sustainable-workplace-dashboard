@@ -29,7 +29,7 @@ A portfolio-grade Streamlit dashboard simulating a multi-site workplace transfor
 6. Standards Compliance
 
 ## Live Demo
-https://sustainable-workplace-dashboard.streamlit.app/Cost_ROI_Simulator
+https://sustainable-workplace-dashboard.streamlit.app/
 
 ## Repository
 https://github.com/upasanasen/sustainable-workplace-dashboard
