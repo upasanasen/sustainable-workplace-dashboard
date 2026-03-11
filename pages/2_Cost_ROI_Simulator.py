@@ -36,7 +36,7 @@ st.divider()
 st.subheader("Results")
 
 office_area = float(site["office_area_sqm"])
-electricity_price = float(site["electricity_price_eur_per_kwh"])
+electricity_price = 0.25
 
 capex_total = office_area * capex_per_sqm
 baseline_kwh = office_area * baseline_kwh_per_sqm
