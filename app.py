@@ -27,4 +27,4 @@ Use the **sidebar pages** to explore each module.
 """
 )
 
-st.info("Next step: we will paste the full page modules and load data from your CSV files.")
+st.info("This dashboard prototype simulates a multi-site workplace transformation program, integrating sustainability metrics, financial ROI modelling, procurement evaluation, governance monitoring, and compliance tracking.")
