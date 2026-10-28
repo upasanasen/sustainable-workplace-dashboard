@@ -1,0 +1,5 @@
+measure,flag_column,basis,unit_cost_eur,lifetime_years,notes
+LED lighting retrofit,lighting_upgrade,office_area_sqm,45,15,Luminaire swap plus daylight and presence controls
+HVAC modernisation,hvac_upgrade,office_area_sqm,180,20,Heat-pump conversion with BMS integration
+Green roof installation,green_roof,roof_area_sqm,120,30,Extensive substrate with native planting and irrigation
+Low-carbon fit-out materials,low_carbon_materials,office_area_sqm,65,20,Uplift over standard specification for EPD-backed materials

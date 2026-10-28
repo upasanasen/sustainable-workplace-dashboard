@@ -1,5 +1,7 @@
 import streamlit as st
 
+from utils import io
+
 st.set_page_config(
     page_title="Sustainable Workplace Transformation Program Dashboard",
     page_icon="🏢",
@@ -8,23 +10,39 @@ st.set_page_config(
 
 st.title("🏢 Sustainable Workplace Transformation Program Dashboard")
 
+sites = io.load_sites()
+
 st.markdown(
     """
 ### What this project is
-A portfolio-grade, **EY-style workplace transformation program** prototype that demonstrates:
+A portfolio-grade **workplace transformation program** prototype that demonstrates:
 
-- **Budget & ROI simulation** (CAPEX/OPEX, payback)
-- **Carbon impact screening** (energy/emissions + rooftop garden proxies)
-- **Procurement & vendor scorecards**
-- **Program governance** (RAID + change control)
+- **Budget & ROI simulation** (CAPEX from a measure catalogue, energy savings, payback)
+- **Carbon impact screening** (region-specific grid factors, rooftop garden proxies)
+- **Procurement & vendor scorecards** (weighted, with the components exposed)
+- **Program governance** (RAID log and change control)
 - **Design standards compliance** across sites
-
-### Multi-site scenario
-- Barcelona (EU)
-- Singapore (APAC)
 
 Use the **sidebar pages** to explore each module.
 """
 )
 
-st.info("This dashboard prototype simulates a multi-site workplace transformation program, integrating sustainability metrics, financial ROI modelling, procurement evaluation, governance monitoring, and compliance tracking.")
+st.subheader(f"Portfolio: {len(sites)} sites")
+regions = (
+    sites.groupby("region")["site"]
+    .apply(lambda s: ", ".join(sorted(s)))
+    .reset_index()
+    .rename(columns={"region": "Region", "site": "Sites"})
+)
+st.dataframe(regions, width="stretch", hide_index=True)
+
+st.info(
+    "Every figure in this dashboard is computed from the CSVs in `data/` by the "
+    "calculation modules in `utils/` — nothing is hardcoded in the pages. Swap the "
+    "CSVs for real project data and the whole dashboard follows."
+)
+
+st.caption(
+    "Illustrative unit costs, emission factors and vendor data. See the README for "
+    "what each file drives."
+)

@@ -1,0 +1,7 @@
+standard_code,standard,category,owner,risk_if_failed,evidence_required
+ISO14001,ISO 14001 (Environmental Management),Environment,Sustainability,Medium,Environmental policy and training records
+ISO50001,ISO 50001 (Energy Management),Energy,Operations,High,Baseline energy audit per site
+HSE,HSE / Workplace Safety,Safety,Facilities,High,Signed HSE audit report
+SUPPLIER,Supplier Code of Conduct,Procurement,Procurement,Medium,Vendor onboarding checklist and signed codes
+PRIVACY,Data Privacy (smart systems),Privacy,IT/Security,High,Completed DPIA for occupancy monitoring
+CSRD,CSRD Readiness (reporting alignment),Reporting,Finance/Sustainability,Medium,ESRS metrics mapping and evidence folder

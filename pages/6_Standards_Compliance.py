@@ -1,56 +1,78 @@
 import streamlit as st
-import pandas as pd
+
+from utils import io, scoring
 
 st.title("Standards & Compliance Dashboard")
+st.write(
+    "Track program compliance across sites: sustainability standards, HSE, "
+    "governance, and reporting readiness."
+)
 
-st.write("Track program compliance across sites: sustainability standards, HSE, governance, and reporting readiness.")
+sites = io.load_sites()
+site_choice = st.selectbox("Select Site", ["All Sites"] + sites["site"].tolist())
+selected_site = None if site_choice == "All Sites" else site_choice
 
-# Load sites for context (optional)
-try:
-    sites = pd.read_csv("data/sites.csv")
-    site_names = sites["site"].tolist() if "site" in sites.columns else []
-except Exception:
-    sites = None
-    site_names = []
-
-selected_site = st.selectbox("Select Site", ["All Sites"] + site_names)
+register = io.compliance_register(selected_site)
 
 st.divider()
-
-# Demo compliance checklist
-compliance = pd.DataFrame([
-    {"standard": "ISO 14001 (Environmental Management)", "owner": "Sustainability", "status": "In Progress", "evidence": "Policy draft + training plan", "risk_if_failed": "Medium"},
-    {"standard": "ISO 50001 (Energy Management)", "owner": "Operations", "status": "Planned", "evidence": "Baseline energy audit required", "risk_if_failed": "High"},
-    {"standard": "HSE / Workplace Safety", "owner": "Facilities", "status": "Completed", "evidence": "HSE audit signed", "risk_if_failed": "High"},
-    {"standard": "Supplier Code of Conduct", "owner": "Procurement", "status": "In Progress", "evidence": "Vendor onboarding checklist", "risk_if_failed": "Medium"},
-    {"standard": "Data Privacy (for smart systems)", "owner": "IT/Security", "status": "Planned", "evidence": "DPIA template pending", "risk_if_failed": "High"},
-    {"standard": "CSRD Readiness (reporting alignment)", "owner": "Finance/Sustainability", "status": "In Progress", "evidence": "Metrics mapping started", "risk_if_failed": "Medium"},
-])
-
-# KPIs
 st.subheader("Compliance KPIs")
+
+rate = scoring.compliance_rate(register["status"])
+rag = scoring.rag_status(rate)
+rag_icon = {"Green": "🟢", "Amber": "🟡", "Red": "🔴"}[rag]
+
 c1, c2, c3, c4 = st.columns(4)
-c1.metric("Controls", f"{len(compliance)}")
-c2.metric("Completed", f"{(compliance['status']=='Completed').sum()}")
-c3.metric("In Progress", f"{(compliance['status']=='In Progress').sum()}")
-c4.metric("High Risk Items", f"{(compliance['risk_if_failed']=='High').sum()}")
+c1.metric("Controls", f"{len(register)}")
+c2.metric("Completed", f"{int((register['status'] == 'Completed').sum())}")
+c3.metric("Completion Rate", f"{rate:.0f}%")
+c4.metric("RAG Status", f"{rag_icon} {rag}")
+
+high_risk_open = register[
+    (register["risk_if_failed"] == "High") & (register["status"] != "Completed")
+]
+if not high_risk_open.empty:
+    st.warning(
+        f"{len(high_risk_open)} high-risk control(s) not yet complete: "
+        + ", ".join(sorted(high_risk_open["standard"].unique()))
+    )
 
 st.divider()
-
 st.subheader("Compliance Register")
-st.dataframe(compliance, use_container_width=True)
+st.caption(
+    "Controls from `data/standards_checklist.csv` joined to per-site status in "
+    "`data/site_standards_status.csv`."
+)
+display = register if selected_site is None else register.drop(columns=["site"])
+st.dataframe(
+    display.rename(
+        columns={
+            "site": "Site", "standard": "Standard", "category": "Category",
+            "owner": "Owner", "status": "Status", "evidence": "Evidence",
+            "risk_if_failed": "Risk if failed", "last_reviewed": "Last reviewed",
+        }
+    ),
+    width="stretch",
+    hide_index=True,
+)
 
 st.divider()
+st.subheader("Completion by Site")
+by_site = (
+    io.compliance_register()
+    .groupby("site")["status"]
+    .apply(scoring.compliance_rate)
+    .reset_index(name="completion_percent")
+)
+by_site["rag"] = by_site["completion_percent"].apply(scoring.rag_status)
+st.dataframe(
+    by_site.rename(
+        columns={"site": "Site", "completion_percent": "Completion %", "rag": "RAG"}
+    ).style.format({"Completion %": "{:.0f}%"}),
+    width="stretch",
+    hide_index=True,
+)
 
-# Simple tracker: action plan table
-st.subheader("Action Plan (Portfolio Demo)")
-actions = pd.DataFrame([
-    {"action": "Complete energy audit per site", "due": "2026-04-15", "owner": "Operations", "status": "Planned"},
-    {"action": "Finalize Supplier Code onboarding checklist", "due": "2026-03-25", "owner": "Procurement", "status": "In Progress"},
-    {"action": "Perform DPIA for smart monitoring systems", "due": "2026-04-05", "owner": "IT/Security", "status": "Planned"},
-    {"action": "CSRD metrics mapping + evidence folder structure", "due": "2026-03-30", "owner": "Finance/Sustainability", "status": "In Progress"},
-])
-st.dataframe(actions, use_container_width=True)
-
-st.divider()
-st.caption("Standards dashboard helps demonstrate governance maturity: controls, evidence, owners, risks, and follow-up actions.")
+st.caption(
+    "Demonstrates governance maturity: controls, owners, evidence, risk and "
+    "per-site follow-up. RAG bands are Green ≥80%, Amber ≥50%, Red below."
+)

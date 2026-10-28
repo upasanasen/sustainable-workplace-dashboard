@@ -1,4 +1,6 @@
-streamlit
+# streamlit >= 1.49 for width="stretch" on dataframes (replaces the deprecated
+# use_container_width argument).
+streamlit>=1.49
 pandas
 numpy
 pydeck

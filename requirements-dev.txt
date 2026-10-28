@@ -1,0 +1,4 @@
+-r requirements.txt
+# Test suite: utils/ unit tests plus headless page smoke tests via
+# streamlit.testing.v1.AppTest. Run with: python -m pytest tests/ -q
+pytest>=8
