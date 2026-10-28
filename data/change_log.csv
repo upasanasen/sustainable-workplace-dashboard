@@ -1,0 +1,6 @@
+id,date,title,requested_by,cost_impact_eur,schedule_impact_weeks,status,decision,notes
+CR-01,2026-02-12,Extend green roof to Stockholm office,Sustainability,84000,3,Approved,Approved by steering group,Added after roof survey showed spare load capacity
+CR-02,2026-02-26,Upgrade lighting controls to DALI-2,Operations,31500,1,Approved,Approved by programme board,Improves granularity of energy reporting
+CR-03,2026-03-11,Defer New York HVAC works to FY27,Finance,-240000,0,Approved,Approved by steering group,CAPEX rephasing to protect FY26 envelope
+CR-04,2026-03-19,Add DPIA workstream for smart sensors,IT/Security,18000,2,Pending,Awaiting legal review,Triggered by GDPR screening of occupancy data
+CR-05,2026-04-02,Switch to recycled-content raised flooring,Procurement,12750,0,Rejected,Rejected on lead time,Supplier could not meet the fit-out window

@@ -1,0 +1,9 @@
+id,type,title,impact,likelihood,owner,status,mitigation,due_date
+R-01,Risk,Energy retrofit delays,High,Medium,Operations,Open,Stage works by floor and hold a contingency contractor on call,2026-05-29
+R-02,Risk,CAPEX approval delays,Medium,Medium,Finance,Open,Pre-brief the investment committee with the ROI pack,2026-04-17
+R-03,Risk,Supply chain constraints,Medium,Low,Procurement,Monitoring,Dual-source long-lead HVAC components,2026-06-12
+R-04,Risk,Regulatory compliance risk,High,Low,Sustainability,Open,Quarterly gap review against ISO 14001 and CSRD scope,2026-04-30
+A-01,Assumption,Electricity price holds near 0.25 EUR per kWh,High,Medium,Finance,Open,Re-run the ROI simulator each quarter against hedged tariffs,2026-04-30
+A-02,Assumption,Landlord consent granted for all roof works,High,Medium,Operations,Open,Confirm consent in writing before design freeze per site,2026-04-10
+I-01,Issue,Stockholm roof load survey overdue,Medium,High,Operations,Open,Commission structural survey and defer green roof scoping,2026-04-03
+D-01,Dependency,IT network upgrade must precede BMS rollout,High,Medium,IT/Security,Open,Align BMS go-live with the network programme milestone,2026-07-10
